@@ -60,7 +60,7 @@ then
   #  export TZ='America/Los_Angeles' #'Europe/Paris'
   #fi
 
-	../cpython-${VERSION}/configure --prefix=/usr --enable-shared --enable-optimizations
+	../cpython-${VERSION}/configure --prefix=/usr --enable-shared --enable-optimizations --without-static-libpython
 	make -j$(nproc)
 
   popd
@@ -79,6 +79,22 @@ then
   #chown --recursive 1000 "${APPDIR}"
 fi
 
+#=== Install additional libraries into AppDir
+
+cp --archive /usr/lib/x86_64-linux-gnu/libssl.so* "${APPDIR}/usr/lib"
+cp --archive /usr/lib/x86_64-linux-gnu/libcrypto.so* "${APPDIR}/usr/lib"
+
+#=== Create global wrapper to launch python
+
+cat >${APPDIR}/usr/python <<EOF
+export PYTHONHOME=\$(cd \$(dirname "\$BASH_SOURCE") && pwd)
+export PATH="\$PYTHONHOME"/bin:\$PATH
+export LD_LIBRARY_PATH="\${PYTHONHOME}/lib\${LD_LIBRARY_PATH:+:\$LD_LIBRARY_PATH}"
+python3 $@
+EOF
+
+chmod +x ${APPDIR}/usr/python
+ 
 #=== Make binary tarball
 
 pushd ${APPDIR}/usr
