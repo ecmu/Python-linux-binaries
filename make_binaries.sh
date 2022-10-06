@@ -90,7 +90,7 @@ cat >${APPDIR}/usr/python <<EOF
 export PYTHONHOME=\$(cd \$(dirname "\$BASH_SOURCE") && pwd)
 export PATH="\$PYTHONHOME"/bin:\$PATH
 export LD_LIBRARY_PATH="\${PYTHONHOME}/lib\${LD_LIBRARY_PATH:+:\$LD_LIBRARY_PATH}"
-python3 \$@
+python3 $@
 EOF
 
 chmod +x ${APPDIR}/usr/python
