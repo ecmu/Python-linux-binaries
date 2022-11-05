@@ -31,7 +31,7 @@ export VERSION=$(echo $GITHUB_REF_NAME | cut -d'-' -f1)
 
 #=== Package installations for building
 
-sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes libncurses-dev libgdbm-dev libz-dev tk-dev libsqlite3-dev libreadline-dev liblzma-dev libffi-dev libssl-dev
+sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes libbz2-dev libncurses-dev libgdbm-dev libz-dev tk-dev libsqlite3-dev libreadline-dev liblzma-dev libffi-dev libssl-dev
 
 #=== Get App source
 

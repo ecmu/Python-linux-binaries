@@ -25,7 +25,7 @@ then
   --volume /etc/timezone:/etc/timezone --volume /etc/localtime:/etc/localtime --volume ${SCRIPTPATH}:/${DOCKER_IMAGE_NAME} \
   --env LANG=fr_FR.UTF-8 --env LC_ALL=fr_FR.UTF-8 \
   --name ${DOCKER_IMAGE_NAME} ${DOCKER_IMAGE_NAME} \
-  /usr/bin/bash /${DOCKER_IMAGE_NAME}/make_appimage.sh
+  /usr/bin/bash /${DOCKER_IMAGE_NAME}/make_binaries.sh
 else
   echo "Running existing ${DOCKER_IMAGE_NAME} container..."
   docker start --attach ${DOCKER_IMAGE_NAME}
