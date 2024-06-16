@@ -87,7 +87,11 @@ cp --archive /usr/lib/x86_64-linux-gnu/libcrypto.so* "${APPDIR}/usr/lib"
 #=== Create global wrapper to launch python
 
 cat >${APPDIR}/usr/python <<EOF
-export PYTHONHOME=\$(cd \$(dirname "\$BASH_SOURCE") && pwd)
+#!/usr/bin/env bash
+#set -x #echo on
+#set -e #Exists on errors
+
+export PYTHONHOME=\$(cd \$(dirname \$(realpath "\$BASH_SOURCE")) && pwd)
 export PATH="\$PYTHONHOME"/bin:\$PATH
 export LD_LIBRARY_PATH="\${PYTHONHOME}/lib\${LD_LIBRARY_PATH:+:\$LD_LIBRARY_PATH}"
 python3 \$@
