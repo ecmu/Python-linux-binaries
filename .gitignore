@@ -1,0 +1,4 @@
+appdir/
+cpython-*/
+python-*/
+python*.tar.gz

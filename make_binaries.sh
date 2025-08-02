@@ -60,7 +60,7 @@ then
   #  export TZ='America/Los_Angeles' #'Europe/Paris'
   #fi
 
-	../cpython-${VERSION}/configure --prefix=/usr --enable-shared --enable-optimizations --without-static-libpython
+	../cpython-${VERSION}/configure --prefix=/usr --enable-shared --enable-optimizations --without-static-libpython --with-builtin-libffi
 	make -j$(nproc)
 
   popd
@@ -79,10 +79,11 @@ then
   #chown --recursive 1000 "${APPDIR}"
 fi
 
-#=== Install additional libraries into AppDir
+#=== Bundle additional libraries into AppDir
 
-cp --archive /usr/lib/x86_64-linux-gnu/libssl.so* "${APPDIR}/usr/lib"
 cp --archive /usr/lib/x86_64-linux-gnu/libcrypto.so* "${APPDIR}/usr/lib"
+cp --archive /usr/lib/x86_64-linux-gnu/libffi.so* "${APPDIR}/usr/lib"
+cp --archive /usr/lib/x86_64-linux-gnu/libssl.so* "${APPDIR}/usr/lib"
 
 #=== Create global wrapper to launch python
 
