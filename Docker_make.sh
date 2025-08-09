@@ -5,7 +5,7 @@
 #region === Parse script arguments
 
 DOCKER_IMAGE_NAME=python
-GITHUB_REF_NAME=3.13.5
+GITHUB_REF_NAME=3.13.6
 DOCKER_RESET=0
 
 usage()
@@ -24,6 +24,7 @@ EOF
 while [[ "$#" -gt 0 ]]; do
   case $1 in
     --DockerImageName=*)  DOCKER_IMAGE_NAME="${1#*=}" ;;
+    --GithubRefName=*)    GITHUB_REF_NAME="${1#*=}" ;;
     --DockerReset=*)      DOCKER_RESET="${1#*=}" ;;
     --help|-h)            usage && exit 0 ;;
     #*) usage ;;
